@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.chasehobby.SearchController"
+      style="-fx-background-color: #F0F3F5;">
+    <!-- Верхняя панель -->
+    <HBox spacing="20" alignment="CENTER_LEFT"
+          style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+        <padding>
+            <Insets top="15" right="20" bottom="15" left="20"/>
+        </padding>
+        <!-- Логотип -->
+        <Label text="ChaseHobby" textFill="#2C3E50">
+            <font>
+                <Font name="System Bold" size="24"/>
+            </font>
+        </Label>
+        <!-- Заголовок страницы -->
+        <Label text="Поиск контента" textFill="#2C3E50">
+            <font>
+                <Font name="System Bold" size="18"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <!-- Кнопка назад -->
+        <Button fx:id="backButton" text="← Назад"
+                style="-fx-background-color: transparent; -fx-font-size: 14; -fx-cursor: hand; -fx-text-fill: #2C3E50;"
+                onAction="#handleBack">
+            <padding>
+                <Insets top="8" right="15" bottom="8" left="15"/>
+            </padding>
+        </Button>
+    </HBox>
+    <!-- Основной контент -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets left="20" right="20" bottom="20"/>
+        </padding>
+        <!-- Панель поиска и фильтров -->
+        <VBox spacing="15" prefWidth="300"
+              style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Фильтры" textFill="#2C3E50">
+                <font>
+                    <Font name="System Bold" size="16"/>
+                </font>
+            </Label>
+            <Separator style="-fx-background-color: #E0E0E0;"/>
+            <!-- Поле поиска -->
+            <VBox spacing="5">
+                <Label text="Поиск" textFill="#5D6D7E">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Label>
+                <TextField fx:id="searchField" promptText="Введите название или описание..."
+                           style="-fx-font-size: 14; -fx-padding: 10 15; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E0E0E0; -fx-border-width: 1;"/>
+            </VBox>
+            <!-- Фильтр по жанру -->
+            <VBox spacing="5">
+                <Label text="Жанр" textFill="#5D6D7E">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="genreFilter" prefWidth="260" promptText="Все жанры"
+                          style="-fx-font-size: 14; -fx-background-radius: 8;"/>
+            </VBox>
+            <!-- Фильтр по типу -->
+            <VBox spacing="5">
+                <Label text="Тип контента" textFill="#5D6D7E">
+                    <font>
+                        <Font name="System Bold" size="12"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="mediaTypeFilter" prefWidth="260" promptText="Все типы"
+                          style="-fx-font-size: 14; -fx-background-radius: 8;"/>
+            </VBox>
+            <Separator style="-fx-background-color: #E0E0E0;"/>
+            <!-- Кнопка поиска -->
+            <Button fx:id="searchButton" text="🔍 Найти" maxWidth="Infinity"
+                    style="-fx-background-color: #2C3E50; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-padding: 12; -fx-background-radius: 8; -fx-cursor: hand;"
+                    onAction="#handleSearch"/>
+            <!-- Кнопка сброса -->
+            <Button text="🔄 Сбросить фильтры" maxWidth="Infinity"
+                    style="-fx-background-color: #ECF0F1; -fx-text-fill: #2C3E50; -fx-font-size: 14; -fx-padding: 10; -fx-background-radius: 8; -fx-cursor: hand;"
+                    onAction="#handleReset"/>
+        </VBox>
+        <!-- Результаты поиска -->
+        <VBox spacing="15" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+            <!-- Заголовок с количеством результатов -->
+            <HBox alignment="CENTER_LEFT">
+                <Label fx:id="resultsLabel" text="Результаты поиска" textFill="#2C3E50">
+                    <font>
+                        <Font name="System Bold" size="18"/>
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <!-- Контейнер результатов -->
+            <ScrollPane VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"
+                        style="-fx-background: transparent; -fx-background-color: transparent;"
+                        fitToWidth="true">
+                <VBox fx:id="resultsContainer" spacing="15" alignment="TOP_CENTER"
+                      style="-fx-background-color: transparent;">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+</VBox>
