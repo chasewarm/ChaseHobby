@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.chasehobby.AdminController"
+      style="-fx-background-color: #F0F3F5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Верхняя панель -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="← На главную" onAction="#goBack"
+                style="-fx-background-color: #2C3E50; -fx-text-fill: white; -fx-font-size: 14; -fx-padding: 8 16; -fx-background-radius: 5; -fx-cursor: hand;"/>
+        <Label fx:id="welcomeLabel" text="Панель администратора"
+               style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2C3E50;"/>
+    </HBox>
+
+    <!-- Вкладки -->
+    <TabPane fx:id="adminTabs" VBox.vgrow="ALWAYS">
+        <!-- Вкладка управления контентом -->
+        <Tab text="Управление контентом" closable="false">
+            <SplitPane dividerPositions="0.5">
+                <items>
+                    <!-- Список контента -->
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <Label text="Список контента" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+                        <TableView fx:id="contentTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="titleColumn" text="Название" prefWidth="150"/>
+                                <TableColumn fx:id="typeColumn" text="Тип" prefWidth="80"/>
+                                <TableColumn fx:id="genreColumn" text="Жанр" prefWidth="100"/>
+                                <TableColumn fx:id="ratingColumn" text="Рейтинг" prefWidth="70"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <!-- Форма редактирования -->
+                    <ScrollPane fitToWidth="true">
+                        <VBox spacing="10" style="-fx-padding: 10;">
+                            <Label text="Редактирование контента" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+                            <HBox spacing="10">
+                                <Button text="Новый" onAction="#handleAddContent" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                                <Button text="Сохранить" onAction="#handleSaveContent" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                                <Button text="Удалить" onAction="#handleDeleteContent" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+
+                            <Separator/>
+
+                            <Label text="Название:"/>
+                            <TextField fx:id="contentTitleField"/>
+
+                            <Label text="Описание:"/>
+                            <TextArea fx:id="contentDescriptionField" prefRowCount="3"/>
+
+                            <HBox spacing="10">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label text="Тип:"/>
+                                    <ComboBox fx:id="contentTypeCombo" maxWidth="Infinity"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label text="Жанр:"/>
+                                    <ComboBox fx:id="contentGenreCombo" maxWidth="Infinity"/>
+                                </VBox>
+                            </HBox>
+
+                            <Label text="Автор/Режиссер:"/>
+                            <TextField fx:id="contentAuthorField"/>
+
+                            <HBox spacing="10">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label text="Год:"/>
+                                    <TextField fx:id="contentYearField"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label text="Рейтинг:"/>
+                                    <TextField fx:id="contentRatingField"/>
+                                </VBox>
+                            </HBox>
+
+                            <Label text="URL постера:"/>
+                            <TextField fx:id="contentPosterUrlField"/>
+
+                            <Label text="URL трейлера:"/>
+                            <TextField fx:id="contentTrailerUrlField"/>
+
+                            <Label text="URL для просмотра:"/>
+                            <TextField fx:id="contentWatchUrlField"/>
+
+                            <Label text="URL для прослушивания:"/>
+                            <TextField fx:id="contentListenUrlField"/>
+
+                            <Label text="URL для скачивания:"/>
+                            <TextField fx:id="contentDownloadUrlField"/>
+
+                            <!-- Поля для книг -->
+                            <VBox fx:id="bookFields" spacing="10">
+                                <Separator/>
+                                <Label text="Поля для книги:" style="-fx-font-weight: bold;"/>
+                                <Label text="Автор книги:"/>
+                                <TextField fx:id="bookAuthorField"/>
+                                <Label text="Количество страниц:"/>
+                                <TextField fx:id="bookPageCountField"/>
+                                <Label text="Текст книги:"/>
+                                <TextArea fx:id="bookTextField" prefRowCount="10"/>
+                            </VBox>
+
+                            <!-- Поля для фильмов/сериалов -->
+                            <VBox fx:id="movieFields" spacing="10">
+                                <Separator/>
+                                <Label text="Поля для фильма/сериала:" style="-fx-font-weight: bold;"/>
+                                <Label text="Длительность (мин):"/>
+                                <TextField fx:id="movieDurationField"/>
+                            </VBox>
+
+                            <!-- Поля для сериалов -->
+                            <VBox fx:id="seriesFields" spacing="10">
+                                <Label text="Количество сезонов:"/>
+                                <TextField fx:id="seriesSeasonsField"/>
+                                <Label text="Количество эпизодов:"/>
+                                <TextField fx:id="seriesEpisodesField"/>
+                            </VBox>
+
+                            <!-- Поля для игр -->
+                            <VBox fx:id="gameFields" spacing="10">
+                                <Separator/>
+                                <Label text="Поля для игры:" style="-fx-font-weight: bold;"/>
+                                <Label text="Платформы:"/>
+                                <TextField fx:id="gamePlatformsField"/>
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+                </items>
+            </SplitPane>
+        </Tab>
+
+        <!-- Вкладка управления пользователями -->
+        <Tab text="Пользователи" closable="false">
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <Label text="Список пользователей" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+                <TableView fx:id="userTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="usernameColumn" text="Имя" prefWidth="150"/>
+                        <TableColumn fx:id="loginColumn" text="Логин" prefWidth="150"/>
+                        <TableColumn fx:id="roleColumn" text="Роль" prefWidth="100"/>
+                        <TableColumn fx:id="createdAtColumn" text="Дата регистрации" prefWidth="150"/>
+                    </columns>
+                </TableView>
+                <HBox spacing="10">
+                 
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <!-- Вкладка управления жанрами -->
+        <Tab text="Жанры" closable="false">
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <Label text="Управление жанрами" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+                <ListView fx:id="genresList" VBox.vgrow="ALWAYS"/>
+                <HBox spacing="10">
+                    <TextField fx:id="newGenreField" promptText="Новый жанр" HBox.hgrow="ALWAYS"/>
+                    <Button text="Добавить" onAction="#handleAddGenre"/>
+                </HBox>
+                <Button text="Удалить выбранный" onAction="#handleDeleteGenre"/>
+            </VBox>
+        </Tab>
+
+        <!-- Вкладка статистики -->
+        <Tab text="Статистика" closable="false">
+            <ScrollPane fitToWidth="true">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label text="Общая статистика" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+
+                    <GridPane hgap="20" vgap="10">
+                        <Label text="Всего пользователей:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalUsersLabel" text="0" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Всего контента:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalContentLabel" text="0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Книги:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalBooksLabel" text="0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Фильмы:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalMoviesLabel" text="0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label text="Сериалы:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalSeriesLabel" text="0" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                        <Label text="Подкасты:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalPodcastsLabel" text="0" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                        <Label text="Игры:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <Label fx:id="totalGamesLabel" text="0" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <Separator/>
+
+                    <Label text="Популярный контент" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+                    <ListView fx:id="popularContentList" prefHeight="200"/>
+                </VBox>
+            </ScrollPane>
+        </Tab>
+    </TabPane>
+</VBox>
